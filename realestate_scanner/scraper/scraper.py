@@ -1,17 +1,17 @@
+import time
+import random
+import logging
+
 from bs4 import BeautifulSoup
-import urllib.parse
 from urllib.parse import urlencode, urljoin
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import re
-import time
-import random
-import logging
 
 from validator import validate_listing_data
-
+from data_prep import prepare_listing_data
+from saver import save_listings
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
@@ -50,7 +50,7 @@ def build_search_url(
     return url
 
 
-def scrape_listing_pages(building_type, region, transaction_type, max_pages=2):
+def scrape_listing_pages(building_type, region, transaction_type, max_pages=1):
     driver = webdriver.Chrome()
     page = 1
     all_raw_data = []
@@ -161,17 +161,17 @@ def get_listing_details(listing):
         area = listing_overview_spans[3].text
         url = base_url + listing_url
 
-        print(
-            f"""
-        Listing title: {listing_title}
-        Listing address: {listing_address}
-        Price: {price}
-        Price per square meter: {price_per_sqm}
-        Rooms: {rooms}
-        Area in square meters: {area}
-        URL: {url}
-        """
-        )
+        # print(
+        #     f"""
+        # Listing title: {listing_title}
+        # Listing address: {listing_address}
+        # Price: {price}
+        # Price per square meter: {price_per_sqm}
+        # Rooms: {rooms}
+        # Area in square meters: {area}
+        # URL: {url}
+        # """
+        # )
 
         # print format:
         # Listing title: Luksusowy Penthouse z nadzwyczanym widokiem !!
@@ -200,47 +200,16 @@ def get_listing_details(listing):
         return None
 
 
-def clean_listing_data(raw_data):
-    cleaned_data = []
-
-    for data in raw_data:
-        logging.info("now processing data: ", data)
-        cleaned_entry = {}
-        cleaned_entry["listing_title"] = data["listing_title"].strip()
-        cleaned_entry["listing_address"] = data["listing_address"].strip()
-
-        # Clean the price and handle cases where the result is an empty string
-        price_cleaned = re.sub(r"[^\d]", "", data["price"])
-        cleaned_entry["price"] = int(price_cleaned) if price_cleaned else 0
-
-        # Clean the price per square meter similarly
-        price_per_sqm_cleaned = re.sub(r"[^\d]", "", data["price_per_sqm"])
-        cleaned_entry["price_per_sqm"] = (
-            float(price_per_sqm_cleaned) if price_per_sqm_cleaned else 0
-        )
-
-        cleaned_entry["rooms"] = int(data["rooms"])
-        cleaned_entry["area"] = float(data["area"].replace(" m²", "").replace(",", "."))
-        cleaned_entry["url"] = str(data["url"])
-        logging.info(f"cleaned_data: {str(cleaned_entry)}")
-        cleaned_data.append(cleaned_entry)
-
-    return cleaned_data
-
-
 raw_data = scrape_listing_pages(
-    building_type="mieszkanie", region="slaskie", transaction_type="sprzedaz"
+    building_type="mieszkanie",
+    region="slaskie",
+    transaction_type="sprzedaz",
+    max_pages=1,
 )
 
-cleaned_data = clean_listing_data(raw_data)
+cleaned_listings = prepare_listing_data(raw_data)
+validated_listings = validate_listing_data(cleaned_listings)
 
-validated_data = validate_listing_data(cleaned_data)
 
-
-# if validated_data:
-#     # If the data is valid, proceed to save it to the database
-#     # This will be implemented in the next step
-#     pass
-# else:
-#     # If the data is invalid, print a message or handle it accordingly
-#     print("Invalid data, skipping entry.")
+if validated_listings:
+    save_listings(validated_listings)
