@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "scraper",
     "web_interface",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
