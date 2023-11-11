@@ -20,9 +20,9 @@ from rest_framework.routers import DefaultRouter
 from web_interface.views import RealEstateListingViewSet
 
 router = DefaultRouter()
-router.register(r'listings', RealEstateListingViewSet)
+router.register(r"listings", RealEstateListingViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', include(router.urls)),
+    path("", include(router.urls)),
 ]
