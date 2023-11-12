@@ -9,9 +9,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from validator import validate_listing_data
-from data_prep import prepare_listing_data
-from saver import save_listings
+from scraper.validajter import validate_listing_data
+from scraper.data_prep import prepare_listing_data
+from scraper.saver import save_listings
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"

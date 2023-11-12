@@ -5,8 +5,7 @@
 .\env\Scripts\activate
 
 ## Unix
-source env/bin/activate  # On Unix or MacOS
+source realeastate/bin/activate
 
-## Scrape
-cd into scraper/../commands:
-python manage.py scrape
+## Start scraping. From root:
+python manage.py scrape_listings

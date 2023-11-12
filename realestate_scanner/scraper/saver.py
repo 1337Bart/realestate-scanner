@@ -1,5 +1,5 @@
 import logging
-from models import RealEstateListing
+from scraper.models import RealEstateListing
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"

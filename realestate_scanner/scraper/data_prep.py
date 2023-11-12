@@ -2,25 +2,32 @@ import re
 
 
 def prepare_listing_entry(entry):
-    cleaned_entry = {}
-    cleaned_entry["listing_title"] = entry["listing_title"].strip()
+    if entry:
+        cleaned_entry = {}
+        cleaned_entry["listing_title"] = (
+            entry["listing_title"].strip() if entry["listing_title"] else "missing"
+        )
 
-    price_cleaned = re.sub(r"[^\d]", "", entry["price"])
-    cleaned_entry["price"] = int(price_cleaned) if price_cleaned else 0
+        price_cleaned = re.sub(r"[^\d]", "", entry["price"])
+        cleaned_entry["price"] = int(price_cleaned) if price_cleaned else 0
 
-    price_per_sqm_cleaned = re.sub(r"[^\d]", "", entry["price_per_sqm"])
-    cleaned_entry["price_per_sqm"] = (
-        float(price_per_sqm_cleaned) if price_per_sqm_cleaned else 0
-    )
+        price_per_sqm_cleaned = re.sub(r"[^\d]", "", entry["price_per_sqm"])
+        cleaned_entry["price_per_sqm"] = (
+            float(price_per_sqm_cleaned) if price_per_sqm_cleaned else 0
+        )
 
-    cleaned_entry["rooms"] = int(entry["rooms"])
-    cleaned_entry["area"] = float(entry["area"].replace(" m²", "").replace(",", "."))
-    cleaned_entry["url"] = str(entry["url"])
+        cleaned_entry["rooms"] = int(entry["rooms"])
+        cleaned_entry["area"] = float(
+            entry["area"].replace(" m²", "").replace(",", ".")
+        )
+        cleaned_entry["url"] = str(entry["url"])
 
-    granular_address_details = extract_listing_address(entry["listing_address"].strip())
-    cleaned_entry.update(granular_address_details)
+        granular_address_details = extract_listing_address(
+            entry["listing_address"].strip()
+        )
+        cleaned_entry.update(granular_address_details)
 
-    return cleaned_entry
+        return cleaned_entry
 
 
 def extract_listing_address(address):

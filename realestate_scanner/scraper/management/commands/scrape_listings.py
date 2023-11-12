@@ -5,7 +5,7 @@ from django.core.management.base import BaseCommand
 from scraper.models import RealEstateListing
 
 from scraper.scraper import scrape_listing_pages
-from scraper.validator import validate_listing_data
+from scraper.validajter import validate_listing_data
 from scraper.data_prep import prepare_listing_data
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "realestate_scanner.settings")
