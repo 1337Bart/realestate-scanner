@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from web_interface.views import RealEstateListingViewSet
+from views import RealEstateListingViewSet
 
 router = DefaultRouter()
 router.register(r"listings", RealEstateListingViewSet)

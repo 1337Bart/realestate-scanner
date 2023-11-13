@@ -2,11 +2,10 @@ import os
 import django
 from django.core.management.base import BaseCommand
 
-from scraper.models import RealEstateListing
-
-from scraper.scraper import scrape_listing_pages
-from scraper.validajter import validate_listing_data
-from scraper.data_prep import prepare_listing_data
+from realestate_app.models import RealEstateListing
+from realestate_app.services.scraper import scrape_listing_pages
+from realestate_app.services.validajter import validate_listing_data
+from realestate_app.services.data_prep import prepare_listing_data
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "realestate_scanner.settings")
 django.setup()

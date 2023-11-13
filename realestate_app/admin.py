@@ -1,5 +1,5 @@
 from django.contrib import admin
-from scraper.models import RealEstateListing
+from models import RealEstateListing
 
 # Register your models here.
 

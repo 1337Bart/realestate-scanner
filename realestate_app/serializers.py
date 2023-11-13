@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from scraper.models import RealEstateListing
+from models import RealEstateListing
 
 
 class RealEstateListingSerializer(serializers.ModelSerializer):
