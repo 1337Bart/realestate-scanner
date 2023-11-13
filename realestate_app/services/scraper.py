@@ -92,7 +92,7 @@ def scrape_listing_pages(building_type, region, transaction_type, max_pages=1):
             next_page.click()
         except Exception as e:
             logging.error("Could not find or click the 'Next' button: %s", e)
-            break  # Break out of the loop if we can't go to the next page
+            break
 
         page += 1
         url = build_search_url(
@@ -160,27 +160,6 @@ def get_listing_details(listing):
         rooms = listing_overview_spans[2].text[0]
         area = listing_overview_spans[3].text
         url = base_url + listing_url
-
-        # print(
-        #     f"""
-        # Listing title: {listing_title}
-        # Listing address: {listing_address}
-        # Price: {price}
-        # Price per square meter: {price_per_sqm}
-        # Rooms: {rooms}
-        # Area in square meters: {area}
-        # URL: {url}
-        # """
-        # )
-
-        # print format:
-        # Listing title: Luksusowy Penthouse z nadzwyczanym widokiem !!
-        # Listing address: Tychy, śląskie
-        # Price: 949 900 zł
-        # Price per square meter: 8466 zł/m²
-        # Rooms: 4
-        # Area in square meters: 112,2 m²
-        # URL: https://www.otodom.pl/pl/oferta/luksusowy-penthouse-z-nadzwyczanym-widokiem-ID4mIj8
 
         return {
             "listing_title": listing_title,

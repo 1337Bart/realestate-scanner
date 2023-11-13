@@ -32,10 +32,8 @@ def prepare_listing_entry(entry):
 
 def extract_listing_address(address):
     address_parts = address.split(", ")
-    # Initialize all parts as None
     street, district, city, voivodeship = (None, None, None, None)
 
-    # Assign based on the number of components
     if len(address_parts) == 4:
         street, district, city, voivodeship = address_parts
     elif len(address_parts) == 3:
