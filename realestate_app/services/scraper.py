@@ -10,9 +10,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
-from validate import Validator
-from data_prep import DataPrepare
-from saver import Saver
+from realestate_app.services.validate import Validator
+from realestate_app.services.data_prep import DataPrepare
+from realestate_app.services.saver import Saver
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"

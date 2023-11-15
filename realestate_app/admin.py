@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import RealEstateListing
+from realestate_app.models import RealEstateListing
 
 # Register your models here.
 

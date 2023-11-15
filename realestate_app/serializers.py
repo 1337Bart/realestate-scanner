@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models import RealEstateListing
+from realestate_app.models import RealEstateListing
 
 
 class RealEstateListingSerializer(serializers.ModelSerializer):

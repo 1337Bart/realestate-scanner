@@ -15,3 +15,13 @@ class RealEstateListing(models.Model):
 
     def __str__(self):
         return f"{self.listing_title} - {self.price} zł"
+
+
+class PricePrediction(models.Model):
+    listing = models.ForeignKey(RealEstateListing, on_delete=models.CASCADE)
+    method = models.CharField(max_length=100)
+    predicted_price = models.DecimalField(max_digits=10, decimal_places=2)
+    prediction_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.method} prediction for {self.listing.listing_title}"

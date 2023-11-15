@@ -37,8 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "scraper",
-    "web_interface",
+    "realestate_app",
     "rest_framework",
 ]
 

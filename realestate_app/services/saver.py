@@ -1,6 +1,6 @@
-import logging
 from typing import List, Dict, Optional
-from models import RealEstateListing
+from realestate_app.models import RealEstateListing
+import logging
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
@@ -10,22 +10,22 @@ logging.basicConfig(
 class Saver:
     @staticmethod
     def save_listings(listings: List[Dict[str, Optional[str]]]):
-        for listing in listings:
-            Saver.save_listing(listing)
-        logging.info("Listings saved successfully.")
+        real_estate_objects = []
 
-    @staticmethod
-    def save_listing(validated_realestate_listing: Dict[str, Optional[str]]):
-        listing = RealEstateListing(
-            listing_title=validated_realestate_listing["listing_title"],
-            price=validated_realestate_listing["price"],
-            price_per_sqm=validated_realestate_listing["price_per_sqm"],
-            rooms=validated_realestate_listing["rooms"],
-            area=validated_realestate_listing["area"],
-            url=validated_realestate_listing["url"],
-            street=validated_realestate_listing.get("street"),
-            district=validated_realestate_listing.get("district"),
-            city=validated_realestate_listing.get("city"),
-            voivodeship=validated_realestate_listing["voivodeship"],
-        )
-        listing.save()
+        for validated_realestate_listing in listings:
+            listing = RealEstateListing(
+                listing_title=validated_realestate_listing["listing_title"],
+                price=validated_realestate_listing["price"],
+                price_per_sqm=validated_realestate_listing["price_per_sqm"],
+                rooms=validated_realestate_listing["rooms"],
+                area=validated_realestate_listing["area"],
+                url=validated_realestate_listing["url"],
+                street=validated_realestate_listing.get("street"),
+                district=validated_realestate_listing.get("district"),
+                city=validated_realestate_listing.get("city"),
+                voivodeship=validated_realestate_listing["voivodeship"],
+            )
+            real_estate_objects.append(listing)
+
+        RealEstateListing.objects.bulk_create(real_estate_objects)
+        logging.info(f"{len(real_estate_objects)} listings saved successfully.")
