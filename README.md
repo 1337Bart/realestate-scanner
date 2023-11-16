@@ -4,6 +4,8 @@
 ## Windows
 .\env\Scripts\activate
 
+
+## AREK JEST SUPER
 ## Unix
 source realeastate/bin/activate
 
