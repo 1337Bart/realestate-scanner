@@ -4,9 +4,6 @@
 ## Windows
 .\env\Scripts\activate
 
-## a bartek tez jest fajny
-
-## AREK JEST SUPER
 ## Unix
 source realeastate/bin/activate
 
