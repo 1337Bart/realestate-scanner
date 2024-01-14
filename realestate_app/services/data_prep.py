@@ -5,10 +5,15 @@ from typing import Dict, List, Optional
 class DataPrepare:
     @staticmethod
     def prepare_listing_entry(entry: Dict[str, str]) -> Optional[Dict[str, str]]:
+        if not isinstance(entry, dict):
+            print("Warning: Entry is not a dictionary. Skipping... Entry:", entry)
+            return None
         if entry:
             cleaned_entry = {}
             cleaned_entry["listing_title"] = (
-                entry["listing_title"].strip() if entry["listing_title"] else "missing"
+                entry["listing_title"].strip()
+                if "listing_title" in entry and entry["listing_title"]
+                else "missing"
             )
 
             price_cleaned = re.sub(r"[^\d]", "", entry["price"])
@@ -61,5 +66,7 @@ class DataPrepare:
             cleaned_entry = DataPrepare.prepare_listing_entry(data_entry)
             if cleaned_entry:
                 cleaned_data.append(cleaned_entry)
+            else:
+                continue
 
         return cleaned_data

@@ -10,9 +10,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
-from realestate_app.services.validate import Validator
-from realestate_app.services.data_prep import DataPrepare
-from realestate_app.services.saver import Saver
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
@@ -185,17 +182,17 @@ class Scraper:
             return None
 
 
-scraper = Scraper()
-raw_data = scraper.scrape_listing_pages(
-    building_type="mieszkanie",
-    region="slaskie",
-    transaction_type="sprzedaz",
-    max_pages=1,
-)
+# scraper = Scraper()
+# raw_data = scraper.scrape_listing_pages(
+#     building_type="mieszkanie",
+#     region="slaskie",
+#     transaction_type="sprzedaz",
+#     max_pages=3,
+# )
 
-cleaned_listings = DataPrepare.prepare_listing_data(raw_data)
-validated_listings = Validator.validate_listing_data(cleaned_listings)
+# cleaned_listings = DataPrepare.prepare_listing_data(raw_data)
+# validated_listings = Validator.validate_listing_data(cleaned_listings)
 
 
-if validated_listings:
-    Saver.save_listings(validated_listings)
+# if validated_listings:
+#     Saver.save_listings(validated_listings)

@@ -19,3 +19,9 @@ python realestate_scanner/manage.py calculate_predictions
 python realestate_scanner/manage.py makemigrations
 
 python realestate_scanner/manage.py migrate
+
+
+
+TODO:
+1. normalize -> all strings ToSmall, removeDiacritics
+2. add front

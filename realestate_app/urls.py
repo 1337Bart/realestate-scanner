@@ -1,11 +1,19 @@
 from django.urls import path
-from rest_framework.routers import DefaultRouter
-from realestate_app.views import RealEstateListingViewSet
-from django.urls import path, include
+from .views import PricePredictionListView
+from .views import StartScrapingView
+from .views import CalculatePredictionsView
 
-router = DefaultRouter()
-router.register(r"listings", RealEstateListingViewSet)
 
 urlpatterns = [
-    path("", include(router.urls)),
+    path(
+        "price-predictions/",
+        PricePredictionListView.as_view(),
+        name="price-predictions",
+    ),
+    path("start-scraping/", StartScrapingView.as_view(), name="start-scraping"),
+    path(
+        "calculate-predictions/",
+        CalculatePredictionsView.as_view(),
+        name="calculate-predictions",
+    ),
 ]

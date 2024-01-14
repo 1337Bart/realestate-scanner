@@ -18,9 +18,16 @@ class RealEstateListing(models.Model):
 
 
 class PricePrediction(models.Model):
-    listing = models.ForeignKey(RealEstateListing, on_delete=models.CASCADE)
-    method = models.CharField(max_length=100)
-    predicted_price = models.DecimalField(max_digits=10, decimal_places=2)
+    listing = models.OneToOneField(RealEstateListing, on_delete=models.CASCADE)
+    simple_linear_regression_predicted_price = models.DecimalField(
+        max_digits=10, decimal_places=2, null=True, blank=True
+    )
+    multiple_linear_regression_predicted_price = models.DecimalField(
+        max_digits=10, decimal_places=2, null=True, blank=True
+    )
+    random_forest_predicted_price = models.DecimalField(
+        max_digits=10, decimal_places=2, null=True, blank=True
+    )
     prediction_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

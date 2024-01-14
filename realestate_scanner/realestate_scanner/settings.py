@@ -25,6 +25,23 @@ SECRET_KEY = "django-insecure-%h653@y!gawh7er-83at#o1()*&asii4!a7gfk%cmsqz2wjvp+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": False,
+#     "handlers": {
+#         "console": {
+#             "level": "DEBUG",
+#             "class": "logging.StreamHandler",
+#         },
+#     },
+#     "loggers": {
+#         "django.db.backends": {
+#             "level": "DEBUG",
+#             "handlers": ["console"],
+#         },
+#     },
+# }
+
 ALLOWED_HOSTS = []
 
 
@@ -78,9 +95,9 @@ WSGI_APPLICATION = "realestate_scanner.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "realestate",
-        "USER": "realestate",
-        "PASSWORD": "realestate",
+        "NAME": "realestate3",
+        "USER": "realestate3",
+        "PASSWORD": "realestate3",
         "HOST": "localhost",
         "PORT": "5432",
     }
